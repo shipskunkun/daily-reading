@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+
+/*
+reduce 用法
+
+//代替map
+const arr = [{name:'Amy'},{name:'Bob'}];
+arr.map(it=>it.name); // map
+
+let p = arr.reduce((c,n)=>c.concat(n.name),[]); // reduce
+console.log(p)
+
+//一维数组转二维
+let arr  = [1,2,3,4]
+let arr2 = arr.reduce((total, item)=>{
+    total[total.length - 1].length >= 2 ? total.push([item]) : total[total.length -1].push(item);
+    return total
+}, [[]])
+console.log(arr2)
+
+
+// 小白版本，promise 链式调用
+var p = Promise.resolve(2);
+
+let b = function() {
+    return Promise.resolve().then(()=>{
+      return p
+    })
+}
+let c = b()
+
+
+// reduce 链式调用 promise 
+let promiseFn = function () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('resolve1')
+        resolve()
+      }, 1000)
+    })
+  }
+  let promiseFn2 = function () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('resolve2')
+        resolve()
+      }, 1000)
+    })
+  }
+  let promiseFn3 = function () {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('resolve3')
+        resolve('last resolve')
+      }, 1000)
+    })
+  }
+  let pro = [promiseFn, promiseFn2].reduce((p, f) => {
+    return p.then(f);
+  }, Promise.resolve()) // 提供initialValue，从第一个参数遍历
+
+
+// 扁平化数组 
+let arr = [[1,2,3], [4,5, [6,7]]]
+function flatArray(arr) {
+    return arr.reduce((acc, cur, index)=>{
+        return acc.concat(Array.isArray(cur)? flatArray(cur): cur)
+    },[])
+}
+console.log(flatArray(arr))
+*/
+
+//大数相加
+const s1 = '712569312664357328695151392';
+const s2 = '8100824045303269669937';
+
+function str2arr(str) {
+    return str.split("").map(x => +x).reverse()
+}
+
+function addStr(a, b) {
+    const [h, l] = (a.length > b.length ? [a, b] : [b, a]).map(str2arr);
+    return h.reduce(([digit, tail], cur, index, arr)=>{
+        let sum = cur + (l[index] || 0) + digit;
+        return index === arr.length - 1 ? sum + tail : [+(sum>=10), sum%10 + tail]
+    }, [0, ""])
+}
+console.log(addStr('712569312664357328695151392','8100824045303269669937'));
+
+</script>
+
+</html>
