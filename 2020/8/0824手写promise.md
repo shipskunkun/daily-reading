@@ -6,8 +6,6 @@
 
 2. [Promise之你看得懂的Promise](https://juejin.im/post/6844903629187448845)
 
-3. [Promise实现原理（附源码)](https://juejin.im/post/6844903665686282253)
-
 4. [9k字 | Promise/async/Generator实现原理解析](https://juejin.im/post/6844904096525189128#heading-12)
 
 5. [总结面试中 promise 相关题目的套路](https://mp.weixin.qq.com/s/ZO300QAmmD1ngB1adpnpfw)
@@ -175,7 +173,7 @@ called 防止，promise2 状态改变，没搞懂
 
 如何理解，then 的处理，要在 setTimeout 中
 
-```
+```js
 new Promise((resolve, reject) => {
   resolve(1);
   console.log(2);
@@ -194,7 +192,7 @@ new Promise((resolve, reject) => {
 
 而 onfulfilled， 就是 外层peomise  resolve， 自己失败了，外层的promise 也就失败了
 
-```
+```js
 static race(promises) {
       return new Promise((resolve, reject)=>{
             for(let i of promises) {
@@ -210,7 +208,7 @@ static race(promises) {
 
 
 	具有then 方法的 不一定是 promise 对象，如果是 thenable 对象，难道 
-	
+
 
 什么是 thenable 对象？ 有 then 方法的对象，但不是 promise 实例
 thenable对象指的是具有then方法的对象，比如下面这个对象。
@@ -255,3 +253,4 @@ p1.then(function(value) {
 });
 ```
 
+b
