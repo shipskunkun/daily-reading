@@ -12,8 +12,11 @@
 
 
 6. [通俗浅显的理解Promise中的then](https://segmentfault.com/a/1190000010420744)
-
 7. [thenable 对象](https://segmentfault.com/a/1190000007685095)
+8. https://juejin.im/post/6844903897501286414
+9. https://github.com/xieranmaya/blog/issues/3
+10. https://promisesaplus.com/#notes
+11. https://juejin.im/post/6844903796129136654#heading-20   刘小夕
 
 
 自己第一遍写
@@ -252,5 +255,3 @@ p1.then(function(value) {
   console.log(456);  // 42
 });
 ```
-
-b
