@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+
+/*
+function currying(fn,...args){
+    if(fn.length <= args.length){
+        return fn(...args)
+    }
+    return function(...args1){
+        console.log(args, args1)
+        return currying(fn,...args,...args1)
+    }
+}
+function add(a,b,c){
+    return a + b + c
+}
+add(1,2,3) // 6
+var curryingAdd = currying(add);
+
+let f1 = curryingAdd(1)  // []  [1]
+let f2 = f1(2) // [1] [2]
+let f3 = f2(3)// [1,2]  [3]
+
+*/
+
+
+
+// 如果用reduce 怎么做？
+
+
+
+var obj = {
+    a: {
+        b: {
+            c: 1
+        }
+    }
+}
+let a = find(obj, 'a.b.c') //1
+let b = find(obj, 'a.d.c') //undefined
+
+function find(obj, str) {
+    let arr = str.split(".");
+    let result  = obj;
+    arr.reduce((acc, cur, index, arr)=>{
+        return 
+    }, obj)
+    return result
+}
+
+
+
+</script>
+
+</html>
