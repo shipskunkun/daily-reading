@@ -163,3 +163,15 @@ https://www.cnblogs.com/yexiaochai/p/4901341.html
 谷歌插件
 
 https://chrome.zzzmh.cn/index#ext
+
+小程序优化
+
+https://raoenhui.github.io/wechat/2019/06/18/miniapp/
+
+韭菜
+
+https://mp.weixin.qq.com/s/WcXSsz02XJ6l6QslVEMW9w
+
+5 人团队 | 竹隐 - 如何从 7 年技术架构走向业务管理
+
+https://mp.weixin.qq.com/s/puNo-_bfRjc_JIOTAggCSw

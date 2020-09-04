@@ -280,7 +280,49 @@ class MyPromise {
 }
 
 // 第三版
+function promises2(promises2, x, resolve, reject) {
+    /*四种情况
+    循环引用
+    x是一个primise , promise2 的状态跟随 x
+    thenable, function 或者 object
+    then 是方法，then 不是方法
+    普通值
+    */
 
+    if(promises2 === x) {
+        reject(new Error('循环引用'))
+    }
+
+    if(x && typeof x === 'object' || typeof x === 'function') {
+        //保证只能调用一次
+        let used;
+        try{
+            let then = x.then;
+            if(typeof then === 'function') {
+                then.call(x, y=>{
+                    if(used) return
+                    used = true
+                    resolvePromise(promises2, y, resolve, reject)
+                }, Error=> {
+                    if(used) return
+                    used = true
+                    reject(Error)
+                })
+            }else {
+                resolve(x)
+            }
+        }catch(e) {
+            if (called) return
+            called = true;
+            reject(error)
+        }else {
+            resolve(x)
+        }
+    }
+
+
+
+}
 class MyPromise {
     constructor(fn) {
         this.status = 'pending';
@@ -351,6 +393,61 @@ class MyPromise {
     }
 
     then(onfufilled, onrejected) {
+        // 处理值穿透
+
+        onfufilled = typeof onfufilled === 'function' ? onfufilled : (value)=> value;
+        onrejected = typeof onfufilled === 'function' ? onfufilled : (value)=> {throw value};
+
+        let self = this;
+        //返回一个新的 promise
+        let promises2 = new Promise((resolve, reject)=> {
+            if(self.status == 'fulfilled') {
+                setTimeout(()=>{
+                    try {
+                        let x = onfufilled(self.value)
+                        resolvePromise(promises2, x, resolve, reject)
+                    }catch(e) {
+                        throw(e)
+                    }
+                })
+            }
+
+            if(self.status == 'rejected') {
+                setTimeout(()=>{
+                    try {
+                        let x = onfufilled(self.value)
+                        resolvePromise(promises2, x, resolve, reject)
+                    }catch(e) {
+                        throw(e)
+                    }
+                })
+            }
+
+            if(self.status == 'pending') {
+                self.onfufilled.push(()=>{
+                    setTimeout(()=>{
+                        try {
+                            let x = onfufilled(self.value)
+                            resolvePromise(promises2, x, resolve, reject)
+                        }catch(e) {
+                            throw(e)
+                        }
+                    })
+                })
+                self.onrejected.push(()=>{
+                    setTimeout(()=>{
+                        try {
+                            let x = onfufilled(self.value)
+                            resolvePromise(promises2, x, resolve, reject)
+                        }catch(e) {
+                            throw(e)
+                        }
+                    })
+                })
+            }
+        })
+
+        return promises2
 
     }
 
